@@ -1,3 +1,8 @@
 type Query {
-  getAllProducts: [Product]! 
+  getAllProducts(options: ProductFindAllOptions): ProductOutput 
+  # getAllProducts: ProductOutput
+}
+
+type Mutation {
+  createProduct(input: ProductInput!): Product
 }
