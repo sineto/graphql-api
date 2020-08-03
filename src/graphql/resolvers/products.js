@@ -20,6 +20,12 @@ const createProduct = async (context, { input }) => {
   return product;
 };
 
+const updateProduct = async (context, {id, data}) => {
+  const { name, price } = data;
+  const product = await Products.update(id, [name, price]);
+  return product;
+};
+
 const deleteProduct = async (context, { id }) => {
   await Products.destroy(id);
 };
@@ -28,6 +34,7 @@ module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
+  updateProduct,
   deleteProduct
 };
 

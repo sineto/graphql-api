@@ -53,6 +53,15 @@ const init = (db) => {
     return rows[0];
   };
 
+  const update = async (id, data) => {
+    const { rows } = await db.query('update products set name = $1, price = $2 where id = $3 returning *', [...data, id]);
+    if (!rows[0]) {
+      throw new ApolloError('Failed to updata product');
+    }
+
+    return rows[0];
+  };
+
   const destroy = async (id) => {
     const { rowCount } = await db.query('delete from products where id = $1', [id]);
     if (rowCount === 0) {
@@ -66,6 +75,7 @@ const init = (db) => {
     findAll,
     findById,
     create,
+    update,
     destroy
   };
 };

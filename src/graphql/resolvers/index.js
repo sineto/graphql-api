@@ -2,6 +2,7 @@ const {
   getAllProducts,
   getProductById,
   createProduct,
+  updateProduct,
   deleteProduct
 } = require('./products');
 
@@ -13,6 +14,7 @@ const resolvers = {
 
   Mutation: {
     createProduct,
+    updateProduct,
     deleteProduct
   }
 };
