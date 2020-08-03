@@ -34,6 +34,16 @@ const init = (db) => {
     };
   };
 
+  const findById = async (id) => {
+    const { rows } = await db.query('select * from products where id = $1', [id]);
+    if (!rows[0]) {
+      throw new ApolloError('Product not found', 404);
+    }
+
+    const product = await findImages(rows);
+    return product[0];
+  };
+
   const create = async (data) => {
     const { rows } = await db.query('insert into products (name, price) values ($1, $2) returning *', data);
     if (!rows[0]) {
@@ -45,6 +55,7 @@ const init = (db) => {
 
   return {
     findAll,
+    findById,
     create,
   };
 };

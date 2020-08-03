@@ -1,5 +1,6 @@
 type Query {
   getAllProducts(options: ProductFindAllOptions): ProductOutput 
+  getProductById(id: Int!): Product
 }
 
 type Mutation {

@@ -9,6 +9,11 @@ const getAllProducts = async (context, { options }) => {
   return products;
 }
 
+const getProductById = async (context, { id }) => {
+  const product = await Products.findById(id);
+  return product;
+};
+
 const createProduct = async (context, { input }) => {
   const { name, price } = input;
   const product = await Products.create([name, price]);
@@ -17,6 +22,7 @@ const createProduct = async (context, { input }) => {
 
 module.exports = {
   getAllProducts,
+  getProductById,
   createProduct,
 };
 

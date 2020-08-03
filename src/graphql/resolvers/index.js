@@ -1,11 +1,13 @@
 const {
   getAllProducts,
+  getProductById,
   createProduct,
 } = require('./products');
 
 const resolvers = {
   Query: {
-    getAllProducts
+    getAllProducts,
+    getProductById,
   },
 
   Mutation: {
