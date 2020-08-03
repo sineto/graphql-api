@@ -53,10 +53,20 @@ const init = (db) => {
     return rows[0];
   };
 
+  const destroy = async (id) => {
+    const { rowCount } = await db.query('delete from products where id = $1', [id]);
+    if (rowCount === 0) {
+      throw new ApolloError('Failed to delete product', 500);
+    }
+
+    return;
+  };
+
   return {
     findAll,
     findById,
     create,
+    destroy
   };
 };
 

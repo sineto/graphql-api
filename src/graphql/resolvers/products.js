@@ -20,9 +20,14 @@ const createProduct = async (context, { input }) => {
   return product;
 };
 
+const deleteProduct = async (context, { id }) => {
+  await Products.destroy(id);
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
+  deleteProduct
 };
 
