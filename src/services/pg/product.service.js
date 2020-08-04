@@ -34,6 +34,16 @@ const init = (db) => {
     };
   };
 
+  const findAllByCategory = async (categoryId) => {
+    const { rows } = await db.query('select * from products where id in (select product_id from products_categories where category_id = $1)', [categoryId]);
+    if (!rows[0]) {
+      throw new ApolloError('Products not found', 404);
+    }
+    
+    const products = await findImages(rows);
+    return products;
+  };
+
   const findById = async (id) => {
     const { rows } = await db.query('select * from products where id = $1', [id]);
     if (!rows[0]) {
@@ -73,6 +83,7 @@ const init = (db) => {
 
   return {
     findAll,
+    findAllByCategory,
     findById,
     create,
     update,

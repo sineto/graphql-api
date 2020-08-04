@@ -2,10 +2,15 @@ const db = require('../../database/pg.config');
 const Products = require('../../services/pg/product.service')(db);
 
 const getAllProducts = async (context, { options }) => {
-  const { limit, offset, orderBy, order } = options || {};
+  const { limit, offset, orderBy, order, categoryId } = options || {};
 
-  const products = await Products.findAll({ limit, offset, orderBy, order });
-  console.log('getall', products);
+  let products;
+  if (categoryId) {
+    products = await Products.findAllByCategory(categoryId);
+    return products;
+  }
+
+  products = await Products.findAll({ limit, offset, orderBy, order });
   return products;
 }
 
